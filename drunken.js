@@ -8,12 +8,17 @@ var validKeys = ["ArrowUp",
 // Initialize board
 var board = document.querySelector("#board");
 var boardSize = 25;
+var gridSize = Math.sqrt(boardSize);
+var count = 1;
 
-for(var i = 0; i < boardSize; i++){
-    var newSquare = document.createElement("div");
-    newSquare.className = "square";
-    newSquare.id = "sq"+(i+1);
-    board.append(newSquare);
+for(var y = 1; y <= gridSize; y++){
+    for(var x = 1; x <= gridSize; x++){
+        var newSquare = document.createElement("div");
+        newSquare.className = "square row" + y + " col" + x;
+        newSquare.id = "sq"+(count);
+        board.append(newSquare);
+        count++
+    }
 }
 
 var testBox = document.querySelector("#sq4");
