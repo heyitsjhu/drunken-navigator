@@ -14,14 +14,14 @@
     line-height: 100px;
 }
 
-.current-position {
-    background-color: pink;
-}
-
 .start {
     background-color: red;
 }
 
 .end {
     background-color: green;
+}
+
+.current-position {
+    background-color: purple !important;
 }
