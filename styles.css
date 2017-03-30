@@ -1,0 +1,15 @@
+.container {
+    margin: 0 auto;
+    width: 500px;
+}
+
+.square {
+    box-sizing: border-box;
+    width: 100px;
+    height: 100px;
+    float: left;
+    background-color: steelblue;
+    border: 1px solid black;
+    text-align: center;
+    line-height: 100px;
+}
