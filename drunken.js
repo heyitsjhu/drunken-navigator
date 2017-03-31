@@ -1,73 +1,41 @@
 // Valid key strokes.
-var validKeys = [
-    "ArrowUp",
-    "ArrowRight",
-    "ArrowDown",
-    "ArrowLeft"
-];
+var data = {
+    "ArrowUp": { edge: "top-edge" },
+    "ArrowRight": { edge: "right-edge" },
+    "ArrowDown": { edge: "bottom-edge" },
+    "ArrowLeft": { edge: "left-edge" }
+};
 
 // Initialization
 var resetButton = document.querySelector("#reset");
 var gameOver = false;
 var gridSize;
 
-createBoard();
-setupBoard();
-pickStartAndEnd();
+init();
 
-// Add event listener to document.
+
+/**
+ ** EVENT LISTENERS
+ **/
+
+// Add event listener to document
 document.body.addEventListener("keydown", function(e){
-        
     if(gameOver === false){
-        // Find current position.
+        // Find current position
         var currentPosition = document.querySelector(".current-position");
         
-        // Check if key pressed is an arrow key.
-        for(var i = 0; i < validKeys.length; i++){
-            if(e.key === validKeys[i]){
-                console.log(e);
+        // If key pressed is valid, move to next position
+        for(var validKey in data){
+            if(e.key === validKey && currentPosition.getAttribute(data[validKey].edge) === "false"){
+                moveToNextPosition(currentPosition, validKey).classList.add("current-position");
                 
-                // Find next location based on key stroke and apply proper class.
-                // Check if currentPosition is at the edge of the board.
-                if(e.key === "ArrowUp" && currentPosition.getAttribute("top-edge") === "false"){
-                    // move up
-                    var nextPosition = document.getElementById(Number(currentPosition.id) - gridSize);
-                    nextPosition.classList.add("current-position");
-                    
-                    // Remove class from old position.
-                    currentPosition.classList.remove("current-position");
-                }
-                
-                if(e.key === "ArrowLeft" && currentPosition.getAttribute("left-edge") === "false"){
-                    // move left
-                    var nextPosition = document.getElementById(Number(currentPosition.id) - 1);
-                    nextPosition.classList.add("current-position");
-                    
-                    // Remove class from old position.
-                    currentPosition.classList.remove("current-position");
-                }
-                
-                if(e.key === "ArrowDown" && currentPosition.getAttribute("bottom-edge") === "false"){
-                    // move down
-                    var nextPosition = document.getElementById(Number(currentPosition.id) + gridSize);
-                    nextPosition.classList.add("current-position");
-                    
-                    // Remove class from old position.
-                    currentPosition.classList.remove("current-position");
-                }
-                
-                if(e.key === "ArrowRight" && currentPosition.getAttribute("right-edge") === "false"){
-                    // move right
-                    var nextPosition = document.getElementById(Number(currentPosition.id) + 1);
-                    nextPosition.classList.add("current-position");
-                    
-                    // Remove class from old position.
-                    currentPosition.classList.remove("current-position");
-                }
+                // Remove class from old position
+                currentPosition.classList.remove("current-position");
             }
         }
         
-        // Check if new position is at the goal.
+        
+        // Check if new position is at the goal
         currentPosition = document.querySelector(".current-position");
         if(currentPosition.classList.contains("end")){
             gameOver = true;
@@ -78,15 +46,32 @@ document.body.addEventListener("keydown", function(e){
         }
     }
 });
-
     
 resetButton.addEventListener("click", function(){
+    // Reset the text inside the button
+    if(this.textContent !== "Restart") this.textContent = "Restart";
+    
+    // Restart the game, if necessary
+    if(gameOver !== false) gameOver = false;
+    
+    // Reset message in marquee
     var marqueeMessage = document.querySelector(".marquee__message");
-    marqueeMessage.textContent = "";
-    this.textContent = "Restart";
-    gameOver = false;
-    redrawBoard();
+    if(marqueeMessage.textContent !== "") marqueeMessage.textContent = "";        
+    
+    // Remove and recreate board
+    document.querySelector("#board").remove();
+    init();
 });
+
+/**
+ ** FUNCTIONS
+ **/
+
+function init(){
+    createBoard();
+    setupBoard();
+    pickStartAndEnd();
+}
 
 function createBoard(){
     var newBoard = document.createElement("div");
@@ -122,15 +107,6 @@ function setupBoard(){
     }
 }
 
-function redrawBoard(){
-    // Remove the current board
-    document.querySelector("#board").remove();
-    
-    createBoard();
-    setupBoard();
-    pickStartAndEnd();
-}
-
 function pickStartAndEnd() {
     // Select random start and end squares.
     // Start square
@@ -141,4 +117,17 @@ function pickStartAndEnd() {
     var endPosition = Math.floor(Math.random() * 5 + 1) + 20;
     console.log(endPosition);
     document.getElementById(endPosition).classList.add("end");
+}
+
+// Move to next position on board based on current position
+function moveToNextPosition(current, keypressed){
+    if(keypressed === "ArrowUp"){
+        return document.getElementById(Number(current.id) - gridSize);    
+    } else if(keypressed === "ArrowDown"){
+        return document.getElementById(Number(current.id) + gridSize);    
+    } else if(keypressed === "ArrowLeft"){
+        return document.getElementById(Number(current.id) - 1);    
+    } else {
+        return document.getElementById(Number(current.id) + 1);    
+    }
 }
