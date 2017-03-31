@@ -1,14 +1,16 @@
-// Valid key strokes.
 var data = {
     "ArrowUp": { edge: "top-edge" },
     "ArrowRight": { edge: "right-edge" },
     "ArrowDown": { edge: "bottom-edge" },
     "ArrowLeft": { edge: "left-edge" }
 };
+var resetButton = document.querySelector("#resetButton");
+var easyButton = document.querySelector("#easyButton");
+var hardButton = document.querySelector("#hardButton");
+var difficulty = "hard";
+var gameOver = false;
 
 // Initialization
-var resetButton = document.querySelector("#reset");
-var gameOver = false;
 var gridSize;
 
 init();
@@ -63,6 +65,20 @@ resetButton.addEventListener("click", function(){
     init();
 });
 
+hardButton.addEventListener("click", function(){
+    difficulty = "hard";
+    // Remove and recreate board
+    document.querySelector("#board").remove();
+    init();
+});
+
+easyButton.addEventListener("click", function(){
+    difficulty = "easy";
+    // Remove and recreate board
+    document.querySelector("#board").remove();    
+    init();
+});
+
 /**
  ** FUNCTIONS
  **/
@@ -82,15 +98,23 @@ function createBoard(){
 
 function setupBoard(){
     var board = document.querySelector("#board");
-    var boardSize = 25;
-    gridSize = Math.sqrt(boardSize);
     var count = 1;
+    
+    if(difficulty === "easy"){
+        var boardSize = 25;
+    } else if(difficulty === "hard"){
+        var boardSize = 100;
+    }
+    gridSize = Math.sqrt(boardSize);    
     
     for(var x = 1; x <= gridSize; x++){
         for(var y = 1; y <= gridSize; y++){
+            var squareSize = 500 / gridSize;
             var newSquare = document.createElement("div");
             newSquare.className = "square row" + x + " col" + y;
             newSquare.id = count;
+            newSquare.style.width = squareSize + "px";
+            newSquare.style.height = squareSize + "px";
             
             // Assign HTML data attributes identifying whether a square is at the edge of the board.
             x === 1 ? newSquare.setAttribute("top-edge", true) : newSquare.setAttribute("top-edge", false);
