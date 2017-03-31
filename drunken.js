@@ -7,12 +7,12 @@ var data = {
 var resetButton = document.querySelector("#resetButton");
 var easyButton = document.querySelector("#easyButton");
 var hardButton = document.querySelector("#hardButton");
-var difficulty = "hard";
+var difficulty = "easy";
 var gameOver = false;
-
-// Initialization
+var boardSize;
 var gridSize;
 
+// Initialization
 init();
 
 
@@ -36,7 +36,6 @@ document.body.addEventListener("keydown", function(e){
             }
         }
         
-        
         // Check if new position is at the goal
         currentPosition = document.querySelector(".current-position");
         if(currentPosition.classList.contains("end")){
@@ -50,32 +49,19 @@ document.body.addEventListener("keydown", function(e){
 });
     
 resetButton.addEventListener("click", function(){
-    // Reset the text inside the button
-    if(this.textContent !== "Restart") this.textContent = "Restart";
-    
-    // Restart the game, if necessary
-    if(gameOver !== false) gameOver = false;
-    
-    // Reset message in marquee
-    var marqueeMessage = document.querySelector(".marquee__message");
-    if(marqueeMessage.textContent !== "") marqueeMessage.textContent = "";        
-    
-    // Remove and recreate board
-    document.querySelector("#board").remove();
+    resetBoard();
     init();
 });
 
 hardButton.addEventListener("click", function(){
     difficulty = "hard";
-    // Remove and recreate board
-    document.querySelector("#board").remove();
+    resetBoard();
     init();
 });
 
 easyButton.addEventListener("click", function(){
     difficulty = "easy";
-    // Remove and recreate board
-    document.querySelector("#board").remove();    
+    resetBoard();   
     init();
 });
 
@@ -86,7 +72,7 @@ easyButton.addEventListener("click", function(){
 function init(){
     createBoard();
     setupBoard();
-    pickStartAndEnd();
+    generateStartAndEnd();
 }
 
 function createBoard(){
@@ -101,11 +87,11 @@ function setupBoard(){
     var count = 1;
     
     if(difficulty === "easy"){
-        var boardSize = 25;
+        boardSize = 50;
     } else if(difficulty === "hard"){
-        var boardSize = 100;
+        boardSize = 100;
     }
-    gridSize = Math.sqrt(boardSize);    
+    gridSize = Math.floor(Math.sqrt(boardSize));    
     
     for(var x = 1; x <= gridSize; x++){
         for(var y = 1; y <= gridSize; y++){
@@ -131,16 +117,29 @@ function setupBoard(){
     }
 }
 
-function pickStartAndEnd() {
-    // Select random start and end squares.
-    // Start square
-    var startPosition = Math.floor(Math.random() * 5 + 1);
-    document.getElementById(startPosition).classList.add("start", "current-position");
+function resetBoard(){
+    // Reset the text inside the button
+    if(resetButton.textContent !== "Restart") resetButton.textContent = "Restart";
+    if(gameOver !== false) gameOver = false;
     
-    // End square
-    var endPosition = Math.floor(Math.random() * 5 + 1) + 20;
-    console.log(endPosition);
-    document.getElementById(endPosition).classList.add("end");
+    // Reset message in marquee
+    var marqueeMessage = document.querySelector(".marquee__message");
+    if(marqueeMessage.textContent !== "") marqueeMessage.textContent = "";        
+    
+    // Remove and recreate board
+    document.querySelector("#board").remove();
+}
+
+function generateStartAndEnd() {
+    var start, end;
+    while(start === end) {
+        // Randomly selects a startying square and goal
+        start = Math.floor(Math.random() * boardSize + 1);
+        document.getElementById(start).classList.add("current-position");
+    
+        end = Math.floor(Math.random() * boardSize + 1);
+        document.getElementById(end).classList.add("end");
+    }
 }
 
 // Move to next position on board based on current position
