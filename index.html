@@ -6,9 +6,29 @@
     <link rel="stylesheet" href="styles.css" type="text/css" />
 </head>
 <body>
-    <div class="container" id="board">
+    <div class="container">
+        <div class="marquee">
+            <p class="marquee__message"></p>
+        </div>
+        
+        <header class="navbar">
+            <div class="navbar__title">Drunken Navigator</div>
+            <nav class="navbar__nav">
+                <ul class="navbar__list">
+                    <li class="navbar__list-item">item 1</li>
+                    <li class="navbar__list-item">item 2</li>
+                    <li class="navbar__list-item">item 3</li>
+                </ul>
+            </nav>
+            <div class="navbar__section">
+                <div class="board__controls">
+                    <button id="reset">Restart</button>
+                </div>
+            </div>
+        </header>
     </div>
-    
-    <script type="text/javascript" src="drunken.js"></script>
+
+
+    <script type="text/javascript" src="drunken.js" id="drunken-script"></script>
 </body>
 </html>

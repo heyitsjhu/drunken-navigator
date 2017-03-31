@@ -1,4 +1,9 @@
-.container {
+html, body {
+    margin: 0;
+    padding: 0;
+}
+
+#board {
     margin: 0 auto;
     width: 500px;
 }
@@ -24,4 +29,9 @@
 
 .current-position {
     background-color: purple !important;
+}
+
+.marquee {
+    background-color: orange;
+    
 }
