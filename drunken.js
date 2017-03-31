@@ -7,6 +7,11 @@ var data = {
 var resetButton = document.querySelector("#resetButton");
 var easyButton = document.querySelector("#easyButton");
 var hardButton = document.querySelector("#hardButton");
+var timer = document.querySelector("#timer");
+var timerCounter = 0;
+var timerStart = 5;
+timer.innerHTML = timerStart;
+var timerStarted = false;
 var gameOver = false;
 var gridCount = 7;
 
@@ -28,6 +33,9 @@ document.body.addEventListener("keydown", function(e){
             if(e.key === validKey && currentPosition.getAttribute(data[validKey].edge) === "false"){
                 moveToNextPosition(currentPosition, validKey).classList.add("current-position");
                 
+                // Starts game timer
+                if(timerStarted === false) timerStarted = true;
+                
                 // Remove class from old position
                 currentPosition.classList.remove("current-position");
             }
@@ -40,7 +48,7 @@ document.body.addEventListener("keydown", function(e){
             var marqueeMessage = document.querySelector(".marquee__message");
             marqueeMessage.textContent = "Congratulations! You made it!";
             resetButton.textContent = "Play again?";
-        }
+        } 
     }
 });
     
@@ -113,6 +121,11 @@ function resetBoard(){
     // Remove and recreate board
     var board = document.querySelector("#board");
     if(board) board.remove();
+    
+    timerStarted = false;
+    timerCounter = 0;
+    timerStart = 5;
+    timer.innerHTML = timerStart;
 }
 
 function generateStartAndEnd() {
@@ -140,3 +153,19 @@ function moveToNextPosition(current, keypressed){
         return document.getElementById(Number(current.id) + 1);    
     }
 }
+
+
+var countdown = setInterval(function(){
+    if(gameOver !== true && timerStarted === true){
+        timerCounter++;
+        timer.innerHTML = timerStart - timerCounter;    
+        
+        // Game ends if timer reaches zero
+        if(timer.innerHTML == 0) {
+            gameOver = true;
+            var marqueeMessage = document.querySelector(".marquee__message");
+            marqueeMessage.textContent = "Sorry! You didn't make it in time.";
+            resetButton.textContent = "Play again?";
+        }
+    }
+},1000);
