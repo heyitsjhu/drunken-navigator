@@ -1,19 +1,19 @@
-var data = {
-    "ArrowUp": { edge: "top-edge" },
-    "ArrowRight": { edge: "right-edge" },
-    "ArrowDown": { edge: "bottom-edge" },
-    "ArrowLeft": { edge: "left-edge" }
-};
 var resetButton = document.querySelector("#resetButton");
 var easyButton = document.querySelector("#easyButton");
 var hardButton = document.querySelector("#hardButton");
 var timer = document.querySelector("#timer");
 var timerCounter = 0;
-var timerStart = 5;
+var timerStart = 10;
 timer.innerHTML = timerStart;
 var timerStarted = false;
 var gameOver = false;
 var gridCount = 7;
+var data = {
+        "ArrowUp": {},
+        "ArrowRight": {},
+        "ArrowDown": {},
+        "ArrowLeft": {}
+    };;
 
 // Initialization
 newGame();
@@ -73,6 +73,7 @@ function newGame(){
     createBoard();
     setupBoard();
     generateStartAndEnd();
+    mapControls();
 }
 
 function createBoard(){
@@ -85,7 +86,7 @@ function createBoard(){
 function setupBoard(){
     var board = document.querySelector("#board");
     var count = 1;
-    var squareSize = 700 / gridCount;
+    var squareSize = 500 / gridCount;
     
     for(var x = 1; x <= gridCount; x++){
         for(var y = 1; y <= gridCount; y++){
@@ -124,7 +125,7 @@ function resetBoard(){
     
     timerStarted = false;
     timerCounter = 0;
-    timerStart = 5;
+    timerStart = 10;
     timer.innerHTML = timerStart;
 }
 
@@ -143,15 +144,7 @@ function generateStartAndEnd() {
 
 // Move to next position on board based on current position
 function moveToNextPosition(current, keypressed){
-    if(keypressed === "ArrowUp"){
-        return document.getElementById(Number(current.id) - gridCount);    
-    } else if(keypressed === "ArrowDown"){
-        return document.getElementById(Number(current.id) + gridCount);    
-    } else if(keypressed === "ArrowLeft"){
-        return document.getElementById(Number(current.id) - 1);    
-    } else {
-        return document.getElementById(Number(current.id) + 1);    
-    }
+    return document.getElementById(Number(current.id) + data[keypressed].move);    
 }
 
 
@@ -169,3 +162,31 @@ var countdown = setInterval(function(){
         }
     }
 },1000);
+
+var remapControls = setInterval(function(){
+    if(gridCount === 10) mapControls();
+},500);
+
+function mapControls(){
+
+
+    var moreData = [ 
+        { edge: "top-edge", move: -gridCount}, 
+        { edge: "right-edge", move: 1},
+        { edge: "bottom-edge", move: gridCount},
+        { edge: "left-edge", move: -1}
+    ];
+    
+    shuffle(moreData);
+    
+    for(var key in data){
+        data[key] = moreData.pop();
+    }
+}
+
+function shuffle(a) {
+    for (let i = a.length; i; i--) {
+        let j = Math.floor(Math.random() * i);
+        [a[i - 1], a[j]] = [a[j], a[i - 1]];
+    }
+}
