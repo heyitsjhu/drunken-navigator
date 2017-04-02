@@ -2,7 +2,6 @@ var resetButton = document.querySelector("#resetButton");
 var easyButton = document.querySelector("#easyButton");
 var hardButton = document.querySelector("#hardButton");
 var timer = document.querySelector("#timer");
-var timerCounter = 0;
 var timerStart = 10;
 timer.innerHTML = timerStart;
 var timerStarted = false;
@@ -13,7 +12,7 @@ var data = {
         "ArrowRight": {},
         "ArrowDown": {},
         "ArrowLeft": {}
-    };;
+    };
 
 // Initialization
 newGame();
@@ -24,29 +23,30 @@ newGame();
 
 // Add event listener to document
 document.body.addEventListener("keydown", function(e){
-    if(gameOver === false){
+    if (gameOver === false) {
         // Find current position
         var currentPosition = document.querySelector(".current-position");
         
         // If key pressed is valid, move to next position
-        for(var validKey in data){
-            if(e.key === validKey && currentPosition.getAttribute(data[validKey].edge) === "false"){
+        for (var validKey in data) {
+            if (e.key === validKey && currentPosition.getAttribute(data[validKey].edge) === "false") {
                 moveToNextPosition(currentPosition, validKey).classList.add("current-position");
                 
                 // Starts game timer
-                if(timerStarted === false) timerStarted = true;
+                if (timerStarted === false) timerStarted = true;
                 
                 // Remove class from old position
                 currentPosition.classList.remove("current-position");
             }
         }
         
+        remapControls();
+        
         // Check if new position is at the goal
         currentPosition = document.querySelector(".current-position");
-        if(currentPosition.classList.contains("end")){
+        if (currentPosition.classList.contains("end")) {
             gameOver = true;
-            var marqueeMessage = document.querySelector(".marquee__message");
-            marqueeMessage.textContent = "Congratulations! You made it!";
+            setMarquee("Congratulations! You made it!");
             resetButton.textContent = "Play again?";
         } 
     }
@@ -54,13 +54,13 @@ document.body.addEventListener("keydown", function(e){
     
 resetButton.addEventListener("click", newGame);
 
-hardButton.addEventListener("click", function(){
-    gridCount = 10;
+easyButton.addEventListener("click", function(){
+    gridCount = 7; 
     newGame();
 });
 
-easyButton.addEventListener("click", function(){
-    gridCount = 7;
+hardButton.addEventListener("click", function(){
+    gridCount = 10; 
     newGame();
 });
 
@@ -70,13 +70,14 @@ easyButton.addEventListener("click", function(){
 
 function newGame(){
     resetBoard();
-    createBoard();
+    createEmptyBoard();
     setupBoard();
     generateStartAndEnd();
     mapControls();
 }
 
-function createBoard(){
+
+function createEmptyBoard(){
     var newBoard = document.createElement("div");
     newBoard.id = "board";
     var container = document.querySelector("#drunken-script");
@@ -88,8 +89,8 @@ function setupBoard(){
     var count = 1;
     var squareSize = 500 / gridCount;
     
-    for(var x = 1; x <= gridCount; x++){
-        for(var y = 1; y <= gridCount; y++){
+    for (var x = 1; x <= gridCount; x++) {
+        for (var y = 1; y <= gridCount; y++) {
             var newSquare = document.createElement("div");
             newSquare.className = "square row" + x + " col" + y;
             newSquare.id = count;
@@ -112,75 +113,76 @@ function setupBoard(){
 
 function resetBoard(){
     // Reset the text inside the button
-    if(resetButton.textContent !== "Restart") resetButton.textContent = "Restart";
-    if(gameOver !== false) gameOver = false;
+    if (resetButton.textContent !== "Restart") resetButton.textContent = "Restart";
+    if (gameOver !== false) gameOver = false;
     
-    // Reset message in marquee
-    var marqueeMessage = document.querySelector(".marquee__message");
-    if(marqueeMessage.textContent !== "") marqueeMessage.textContent = "";        
+    // Reset marquee
+    setMarquee("");      
     
     // Remove and recreate board
     var board = document.querySelector("#board");
-    if(board) board.remove();
+    if (board) board.remove();
     
     timerStarted = false;
-    timerCounter = 0;
     timerStart = 10;
     timer.innerHTML = timerStart;
 }
 
 function generateStartAndEnd() {
-    var start, end;
-    var boardSize = gridCount * gridCount;
-    while(start === end) {
-        // Randomly selects a startying square and goal
-        start = Math.floor(Math.random() * boardSize + 1);
-        document.getElementById(start).classList.add("current-position");
+    var boardSize = Math.pow(gridCount, 2);
     
-        end = Math.floor(Math.random() * boardSize + 1);
-        document.getElementById(end).classList.add("end");
+    while (start === end) {
+        var start = assignRandom(1, boardSize);
+        var end = assignRandom(1, boardSize);
     }
+    
+    // Randomly selects a startying square and goal
+    document.getElementById(start).classList.add("current-position");
+    document.getElementById(end).classList.add("end");
+}
+
+function assignRandom(min, max){
+    return Math.floor(Math.random() * (max - min) + min);
 }
 
 // Move to next position on board based on current position
-function moveToNextPosition(current, keypressed){
+function moveToNextPosition(current, keypressed) {
     return document.getElementById(Number(current.id) + data[keypressed].move);    
 }
 
+function setMarquee(string) {
+    var marqueeMessage = document.querySelector(".marquee__message");
+    marqueeMessage.textContent = string;
+}
 
-var countdown = setInterval(function(){
-    if(gameOver !== true && timerStarted === true){
-        timerCounter++;
-        timer.innerHTML = timerStart - timerCounter;    
+// Initiate countdown timer
+setInterval(function() {
+    if (gameOver !== true && timerStarted === true) {
+        timer.innerHTML = timerStart--;    
         
         // Game ends if timer reaches zero
-        if(timer.innerHTML == 0) {
+        if (timer.innerHTML == 0) {
             gameOver = true;
-            var marqueeMessage = document.querySelector(".marquee__message");
-            marqueeMessage.textContent = "Sorry! You didn't make it in time.";
+            setMarquee("Sorry! You didn't make it in time.");
             resetButton.textContent = "Play again?";
         }
     }
-},1000);
+}, 1000);
 
-var remapControls = setInterval(function(){
-    if(gridCount === 10) mapControls();
-},500);
+// Map arrow keys to a random direction
+function mapControls() {
 
-function mapControls(){
-
-
-    var moreData = [ 
+    var controlData = [ 
         { edge: "top-edge", move: -gridCount}, 
         { edge: "right-edge", move: 1},
         { edge: "bottom-edge", move: gridCount},
         { edge: "left-edge", move: -1}
     ];
     
-    shuffle(moreData);
+    shuffle(controlData);
     
-    for(var key in data){
-        data[key] = moreData.pop();
+    for (var key in data) {
+        data[key] = controlData.pop();
     }
 }
 
@@ -189,4 +191,9 @@ function shuffle(a) {
         let j = Math.floor(Math.random() * i);
         [a[i - 1], a[j]] = [a[j], a[i - 1]];
     }
+}
+
+// Remap arrow keys every 1/2 second
+function remapControls() {
+    if (gridCount === 10) setInterval(mapControls(), 500);
 }
