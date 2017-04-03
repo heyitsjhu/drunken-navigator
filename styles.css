@@ -1,45 +1,143 @@
-html, body {
+* {
+    box-sizing: border-box;
     margin: 0;
     padding: 0;
 }
 
+body {
+    background-color: #FDFFFC;
+    font-family: 'Lato', sans-serif;
+}
+
+button {
+    margin: 0 20px 0 0;
+    padding: 0 30px;
+    height: 50px;
+    background-color: #2EC4B6;
+    border: 0 solid transparent;
+    font-family: 'Lato', sans-serif;
+    font-size: 22px;
+    letter-spacing: 0.5px;
+    color: #FDFFFC;
+}
+
+button:focus {
+    outline: none;
+}
+button:active {
+        background-color: #ff9f1c; /* Orange */
+}
+
 #board {
-    margin: 0 auto;
+    margin: 120px auto;
     width: 500px;
+    overflow: hidden;
+}
+
+.button--selected {
+    background-color: #ff9f1c; /* Orange */
+}
+
+.navbar {
+    margin: 0;
+    padding: 0;
+    height: 80px;
+    width: 100%;
+    border-top: 2px solid #2EC4B6;
+    background-color: #FDFFFC;
+    color: #011627;
+}
+
+.navbar--flexbox,
+.board__controls--flexbox {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.navbar--fixed-btm {
+    position: fixed;
+    left: 0;
+    bottom: 0;
+}
+
+.navbar__title {
+    padding: 0 30px;
+    font-family: 'Homemade Apple', cursive;
+    font-size: 28px;
+    color: #ff9f1c; /* Orange */
+    letter-spacing: -1px;
+}
+
+.navbar__list {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.navbar__list-item {
+    padding-right: 30px;
+    float: left;
 }
 
 .square {
-    box-sizing: border-box;
     width: 100px;
     height: 100px;
     float: left;
-    background-color: steelblue;
-    border: 1px solid black;
+    background-color: #eee;
+    border: 1px solid #2EC4B6;
     text-align: center;
     line-height: 100px;
 }
 
-.start {
-    background-color: red;
-}
-
-.end {
-    background-color: green;
+.target-goal {
+    background-image: url("assets/house.png");
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
 }
 
 .current-position {
-    background-color: purple !important;
+    background-image: url("assets/drunken.png");
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
 }
 
 .marquee {
-    background-color: orange;
-    
+    position: fixed;
+    top: 0;
+    left: 0;
+    display: none;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 30px;
+    width: 100%;
+    height: 80px;
+    background-color: #2EC4B6;
+    font-size: 22px;
+    color: #FDFFFC;
+    z-index: 10;
+}
+
+.marquee__x:hover {
+    cursor: pointer;
 }
 
 .timer {
-    display:inline-block;
-    margin: 0 auto;
-    padding: 10px 20px;
-    background-color: lime;
-    font-size: 40px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 120px;
+    padding: 5px 30px;
+    background-color: #E71D36;
+    color: #FDFFFC;
+}
+.timer--fixed-top-right {
+    position: absolute;
+    top: 0;
+    right: 0;
+}
+.timer__seconds {
+    font-size: 56px;    
 }

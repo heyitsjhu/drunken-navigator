@@ -1,6 +1,7 @@
 var resetButton = document.querySelector("#resetButton");
 var easyButton = document.querySelector("#easyButton");
 var hardButton = document.querySelector("#hardButton");
+var marqueeX = document.querySelector("#marqueeX");
 var timer = document.querySelector("#timer");
 var timerStart = 10;
 timer.innerHTML = timerStart;
@@ -44,7 +45,7 @@ document.body.addEventListener("keydown", function(e){
         
         // Check if new position is at the goal
         currentPosition = document.querySelector(".current-position");
-        if (currentPosition.classList.contains("end")) {
+        if (currentPosition.classList.contains("target-goal")) {
             gameOver = true;
             setMarquee("Congratulations! You made it!");
             resetButton.textContent = "Play again?";
@@ -57,11 +58,24 @@ resetButton.addEventListener("click", newGame);
 easyButton.addEventListener("click", function(){
     gridCount = 7; 
     newGame();
+    buttonSelected(this, hardButton);
 });
+
+function buttonSelected(buttonOn, buttonOff) {
+    if (!buttonOn.classList.contains("button--selected")) {
+        buttonOn.classList.toggle("button--selected");
+        if (buttonOff.classList.contains("button--selected")) buttonOff.classList = "";   
+    }
+}
 
 hardButton.addEventListener("click", function(){
     gridCount = 10; 
     newGame();
+    buttonSelected(this, easyButton);
+});
+
+marqueeX.addEventListener("click", function() {
+    marqueeDisplay("none");
 });
 
 /**
@@ -74,6 +88,7 @@ function newGame(){
     setupBoard();
     generateStartAndEnd();
     mapControls();
+    marqueeDisplay("none");
 }
 
 
@@ -138,7 +153,7 @@ function generateStartAndEnd() {
     
     // Randomly selects a startying square and goal
     document.getElementById(start).classList.add("current-position");
-    document.getElementById(end).classList.add("end");
+    document.getElementById(end).classList.add("target-goal");
 }
 
 function assignRandom(min, max){
@@ -153,6 +168,15 @@ function moveToNextPosition(current, keypressed) {
 function setMarquee(string) {
     var marqueeMessage = document.querySelector(".marquee__message");
     marqueeMessage.textContent = string;
+    
+    if (marqueeMessage.textContent !== "") {
+        marqueeDisplay("flex");
+    }
+}
+
+function marqueeDisplay(type){
+    var marquee = document.querySelector(".marquee");
+    marquee.style.display = type;
 }
 
 // Initiate countdown timer
