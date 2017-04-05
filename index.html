@@ -2,20 +2,15 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>The Drunken Navigator</title>
-    <link href="https://fonts.googleapis.com/css?family=Lato:300|Homemade+Apple" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Lato:300,700" rel="stylesheet">
     <link rel="stylesheet" href="styles.css" type="text/css" />
 </head>
 <body>
     <header class="navbar navbar--flexbox navbar--fixed-btm">
         <div class="navbar__title">Drunken Navigator</div>
-        <div class="navbar__section">
-            <div class="board__controls board__controls--flexbox ">
-                <button id="resetButton">Restart</button>
-                <button id="easyButton" class="button--selected">Easy</button>
-                <button id="hardButton">Hard</button>
-            </div>
-        </div>
         <nav class="navbar__nav">
             <ul class="navbar__list">
                 <li class="navbar__list-item">item 1</li>
@@ -30,9 +25,15 @@
         <span class="marquee__x" id="marqueeX">X</span>
     </div>
     
-    <div class="timer timer--fixed-top-right">
-        <span class="time-label">Time Remaining</span>
+    <div class="timer">
+        <span class="timer__label">Time Remaining</span>
         <span class="timer__seconds" id="timer"></span>
+    </div>
+    
+    <div class="board__controls board__controls--flexbox ">
+        <button id="resetButton">Restart</button>
+        <button id="easyButton" class="button--selected">Easy</button>
+        <button id="hardButton">Hard</button>
     </div>
 
     <script type="text/javascript" src="drunken.js" id="drunken-script"></script>

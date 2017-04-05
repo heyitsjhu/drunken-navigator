@@ -5,38 +5,36 @@
 }
 
 body {
+    min-width: 700px;
     background-color: #FDFFFC;
     font-family: 'Lato', sans-serif;
 }
 
 button {
-    margin: 0 20px 0 0;
+    margin-right: 20px;
     padding: 0 30px;
     height: 50px;
     background-color: #2EC4B6;
     border: 0 solid transparent;
+    box-shadow: 3px 3px 5px #999;
     font-family: 'Lato', sans-serif;
     font-size: 22px;
     letter-spacing: 0.5px;
     color: #FDFFFC;
 }
 
-button:focus {
-    outline: none;
-}
-button:active {
-        background-color: #ff9f1c; /* Orange */
-}
+button:last-of-type { margin-right: 0; }
+button:focus { outline: none; }
+button:active { background-color: #ff9f1c; /* Orange */ }
 
 #board {
-    margin: 120px auto;
+    margin: 20px auto;
     width: 500px;
     overflow: hidden;
+    box-shadow: 3px 3px 10px #999;
 }
 
-.button--selected {
-    background-color: #ff9f1c; /* Orange */
-}
+.button--selected { background-color: #ff9f1c; /* Orange */ }
 
 .navbar {
     margin: 0;
@@ -48,12 +46,23 @@ button:active {
     color: #011627;
 }
 
+.board__controls {
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    margin-bottom: 80px;
+    padding: 20px;
+    transform: translate(-50%, 0);
+}
+
 .navbar--flexbox,
 .board__controls--flexbox {
     display: flex;
-    justify-content: space-between;
     align-items: center;
 }
+.navbar--flexbox { justify-content: space-between; }
+
+.board__controls--flexbox { justify-content: center; }
 
 .navbar--fixed-btm {
     position: fixed;
@@ -63,10 +72,11 @@ button:active {
 
 .navbar__title {
     padding: 0 30px;
-    font-family: 'Homemade Apple', cursive;
+    font-family: 'Lato', sans-serif;
     font-size: 28px;
+    font-weight: 700;
     color: #ff9f1c; /* Orange */
-    letter-spacing: -1px;
+    letter-spacing: -0.5px;
 }
 
 .navbar__list {
@@ -86,58 +96,50 @@ button:active {
     float: left;
     background-color: #eee;
     border: 1px solid #2EC4B6;
-    text-align: center;
-    line-height: 100px;
 }
 
+.current-position,
 .target-goal {
-    background-image: url("assets/house.png");
     background-size: contain;
     background-repeat: no-repeat;
     background-position: center;
 }
 
-.current-position {
-    background-image: url("assets/drunken.png");
-    background-size: contain;
-    background-repeat: no-repeat;
-    background-position: center;
-}
+.target-goal { background-image: url("assets/house.png"); }
+
+.current-position { background-image: url("assets/drunken.png"); }
 
 .marquee {
-    position: fixed;
-    top: 0;
-    left: 0;
     display: none;
     justify-content: space-between;
     align-items: center;
+    position: absolute;
+    top: 0;
     padding: 10px 30px;
     width: 100%;
-    height: 80px;
+    height: 60px;
+    box-shadow: 3px 3px 10px #999;
     background-color: #2EC4B6;
-    font-size: 22px;
+    font-size: 24px;
     color: #FDFFFC;
     z-index: 10;
 }
 
-.marquee__x:hover {
-    cursor: pointer;
-}
+.marquee__x:hover { cursor: pointer; }
 
 .timer {
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin-top: 120px;
-    padding: 5px 30px;
+    margin: 80px auto 20px;
+    padding: 10px 60px;
+    width: 250px;
+    box-shadow: 3px 3px 10px #999;
     background-color: #E71D36;
     color: #FDFFFC;
 }
-.timer--fixed-top-right {
-    position: absolute;
-    top: 0;
-    right: 0;
-}
+
 .timer__seconds {
-    font-size: 56px;    
+    font-size: 56px;   
+    font-weight: 700;
 }
