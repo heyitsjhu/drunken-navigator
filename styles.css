@@ -105,9 +105,9 @@ button:active { background-color: #ff9f1c; /* Orange */ }
     background-position: center;
 }
 
-.target-goal { background-image: url("assets/house.png"); }
+.target-goal { background-image: url("assets/images/house.png"); }
 
-.current-position { background-image: url("assets/drunken.png"); }
+.current-position { background-image: url("assets/images/drunken.png"); }
 
 .marquee {
     display: none;
@@ -140,7 +140,7 @@ button:active { background-color: #ff9f1c; /* Orange */ }
 }
 
 .timer__seconds {
-    font-size: 56px;   
+    font-size: 56px;
     font-weight: 700;
 }
 
