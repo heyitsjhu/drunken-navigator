@@ -130,4 +130,4 @@ function shuffle(a) {
 }
 
 // Remap arrow keys every 1/2 second
-function remapControls() {setInterval(mapControls(), 500);}
+function remapControls() {setInterval(mapControls(), 750);}
