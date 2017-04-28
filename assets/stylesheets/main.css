@@ -21,7 +21,7 @@ button {
     height: 50px;
     background-color: #2ec4b6;
     border: 0 solid transparent;
-    box-shadow: 3px 3px 5px #999;
+    box-shadow: 3px 3px 5px #ccc;
     font-family: 'Lato', sans-serif;
     font-size: 22px;
     letter-spacing: 0.5px;
