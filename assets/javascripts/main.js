@@ -3,11 +3,13 @@ var board = $board();
 var marquee = $marquee();
 var timer = $timer();
 
+var cardButton = document.querySelector("#cardButton");
 var resetButton = document.querySelector("#resetButton");
 var easyButton = document.querySelector("#easyButton");
 var hardButton = document.querySelector("#hardButton");
 var timerElement = document.querySelector("#timer");
     timerElement.innerHTML = timer.currentCount;
+var cardContainer = document.querySelector(".card__container");
 
 var data = {
         "ArrowUp": {},
@@ -46,7 +48,10 @@ hardButton.addEventListener("click", function(){
     buttonSelected(this, easyButton);
 });
 
-
+// Removes the card that appears on page load
+cardContainer.addEventListener("click", function() {
+    this.remove();
+});
 /**
  ** FUNCTIONS
  **/
@@ -110,10 +115,10 @@ setInterval(function() {
 function mapControls() {
 
     var controlData = [
-        { edge: "top-edge", move: -board.getGridSize()},
-        { edge: "right-edge", move: 1},
-        { edge: "bottom-edge", move: board.getGridSize()},
-        { edge: "left-edge", move: -1}
+        { edge: "top-edge", move: -board.getGridSize() },
+        { edge: "right-edge", move: 1 },
+        { edge: "bottom-edge", move: board.getGridSize() },
+        { edge: "left-edge", move: -1 }
     ];
 
     shuffle(controlData);
@@ -131,4 +136,10 @@ function shuffle(a) {
 }
 
 // Remap arrow keys every 3/4 second
-function remapControls() {setInterval(mapControls(), 750);}
+function remapControls() { setInterval(mapControls(), 750); }
+
+
+// Remove the card that shows up on page load
+function removeCard() {
+    cardContainer.remove();
+}
