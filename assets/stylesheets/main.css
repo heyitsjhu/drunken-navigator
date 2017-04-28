@@ -178,4 +178,19 @@ button:hover {
         left: auto;
         width: 100%;
     }
+    #instructions .instructions__text,
+    #aboutChip .about-chip__text,
+    #aboutTheHouse .about-the-house__text {
+        left: auto;
+        right: 0;
+    }
+    #instructions .instructions__text {
+        top: -220px;
+    }
+    #aboutChip .about-chip__text {
+        top: -335px;
+    }
+    #aboutTheHouse .about-the-house__text {
+        top: -392px;
+    }
 }
