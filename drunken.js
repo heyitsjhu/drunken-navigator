@@ -129,5 +129,5 @@ function shuffle(a) {
     }
 }
 
-// Remap arrow keys every 1/2 second
+// Remap arrow keys every 3/4 second
 function remapControls() {setInterval(mapControls(), 750);}
