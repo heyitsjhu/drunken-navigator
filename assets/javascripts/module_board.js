@@ -1,5 +1,5 @@
 var $board = function() {
-    var anchor, count, currentBoard, newBoard;
+    var anchor, count, currentBoard;
     var gridSize = 7;
 
     // Setups the game baord by targeting the div#board
@@ -50,10 +50,11 @@ var $board = function() {
         // inserts the element into the HTML document.
         create: function() {
             // Inserts new div#board into HTML body.
-            newBoard = document.createElement("div");
+            var mainElement = document.querySelector("main");
+            var newBoard = document.createElement("div");
             newBoard.id = "board";
-            anchor = document.querySelector(".placeholder");
-            document.body.insertBefore(newBoard, anchor);
+            anchor = document.querySelector(".board__controls");
+            mainElement.insertBefore(newBoard, anchor);
 
             setupBoard();
             generateStartingPositions();

@@ -9,7 +9,7 @@ var $marquee = function() {
     function isEmpty() {return marqueeMessage.textContent === "";}
 
     // Show marquee element.
-    function show() {marqueeContainer.style.display = "flex";}
+    function show() {marqueeContainer.style.display = "inherit";}
 
     // Hide marquee element.
     function hide() {marqueeContainer.style.display = "none";}

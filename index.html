@@ -6,51 +6,54 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>The Drunken Navigator</title>
     <link href="https://fonts.googleapis.com/css?family=Lato:300,700" rel="stylesheet">
-    <link rel="stylesheet" href="styles.css" type="text/css" />
+    <link rel="stylesheet" href="./assets/stylesheets/navbar.css" type="text/css" />
+    <link rel="stylesheet" href="./assets/stylesheets/main.css" type="text/css" />
+
 </head>
 <body>
-    <header class="navbar navbar--flexbox navbar--fixed-btm">
-        <div class="navbar__title">Drunken Navigator</div>
-        <nav class="navbar__nav">
-            <ul class="navbar__list">
-                <li class="navbar__list-item">item 1</li>
-                <li class="navbar__list-item">item 2</li>
-                <li class="navbar__list-item">item 3</li>
-            </ul>
-        </nav>
+    <header>
+        <div class="navbar">
+            <div class="navbar__title">Drunken Navigator</div>
+            <nav class="navbar__nav">
+                <ul class="navbar__list">
+                    <li class="navbar__list-item">Instructions</li>
+                    <li class="navbar__list-item">About Chip</li>
+                    <li class="navbar__list-item">About the House</li>
+                </ul>
+            </nav>
+        </div>
     </header>
+    <main>
+        <div class="marquee">
+            <p class="marquee__message"></p>
+        </div>
 
-    <div class="marquee">
-        <p class="marquee__message"></p>
-    </div>
+        <div class="timer">
+            <span class="timer__label">Time Remaining</span>
+            <span class="timer__seconds" id="timer"></span>
+        </div>
 
-    <div class="timer">
-        <span class="timer__label">Time Remaining</span>
-        <span class="timer__seconds" id="timer"></span>
-    </div>
+        <div class="board__controls board__controls--flexbox ">
+            <button id="resetButton">Restart</button>
+            <button id="easyButton" class="button--selected">Easy</button>
+            <button id="hardButton">Hard</button>
+        </div>
 
-    <div class="board__controls board__controls--flexbox ">
-        <button id="resetButton">Restart</button>
-        <button id="easyButton" class="button--selected">Easy</button>
-        <button id="hardButton">Hard</button>
-    </div>
-
-
-    <!--<div class="card">-->
-    <!--    <div class="card__container">-->
-    <!--        <img class="card__image" src="assets/drunken.png">-->
-    <!--        <div class="card__message">-->
-    <!--            <p class="card__text">Hey you!</p>-->
-    <!--            <p class="card__text">Yeah, you.</p>-->
-    <!--            <p class="card__text">-->
-    <!--                I need a favor. I drank a little too much tonight,-->
-    <!--                so needless to say, I'm a bit drunk. I just need some -->
-    <!--                help getting back home. Will you help me out? -->
-    <!--            </p>    -->
-    <!--        </div>-->
-    <!--    </div>-->
-    <!--</div>-->
-    <div class="placeholder"></div>
+        <!--<div class="card">-->
+        <!--    <div class="card__container">-->
+        <!--        <img class="card__image" src="assets/drunken.png">-->
+        <!--        <div class="card__message">-->
+        <!--            <p class="card__text">Hey you!</p>-->
+        <!--            <p class="card__text">Yeah, you.</p>-->
+        <!--            <p class="card__text">-->
+        <!--                I need a favor. I drank a little too much tonight,-->
+        <!--                so needless to say, I'm a bit drunk. I just need some -->
+        <!--                help getting back home. Will you help me out? -->
+        <!--            </p>    -->
+        <!--        </div>-->
+        <!--    </div>-->
+        <!--</div>-->
+    </main>
     <script type="text/javascript" src="assets/javascripts/module_timer.js"></script>
     <script type="text/javascript" src="assets/javascripts/module_marquee.js"></script>
     <script type="text/javascript" src="assets/javascripts/module_board.js"></script>
