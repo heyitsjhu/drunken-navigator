@@ -55,7 +55,8 @@ hardButton.addEventListener("click", function(){
 function buttonSelected(buttonOn, buttonOff) {
     if (!buttonOn.classList.contains("button--selected")) {
         buttonOn.classList.toggle("button--selected");
-        if (buttonOff.classList.contains("button--selected")) buttonOff.classList = "";
+        if (buttonOff.classList.contains("button--selected"))
+            buttonOff.classList = "";
     }
 }
 
@@ -86,7 +87,7 @@ function checkWinCondition() {
     var currentPosition = document.querySelector(".current-position");
     if (currentPosition.classList.contains("target-goal")) {
         game.hasEnded();
-        marquee.setMessage("Congratulations! You made it!");
+        marquee.setMessage("Booyah! Chip made it home. Dogs are happy. You did it!");
         resetButton.textContent = "Play again?";
     }
 }
@@ -99,7 +100,7 @@ setInterval(function() {
         // Game ends if timer reaches zero
         if (timerElement.innerHTML == 0) {
             game.hasEnded();
-            marquee.setMessage("Sorry! You didn't make it in time.");
+            marquee.setMessage("Ugh, Chip fell asleep! He won't budge. Oh well, he's on his own, now. Poor doggies.");
             resetButton.textContent = "Play again?";
         }
     }
