@@ -6,7 +6,7 @@
 
 body {
     min-width: 775px;
-    background-color: #FDFFFC;
+    background-color: #fdfffc;
     font-family: 'Lato', sans-serif;
 }
 main {
@@ -19,14 +19,13 @@ button {
     margin-right: 20px;
     padding: 0 30px;
     height: 50px;
-    background-color: #2EC4B6;
+    background-color: #2ec4b6;
     border: 0 solid transparent;
     box-shadow: 3px 3px 5px #999;
-    border-radius: 2px;
     font-family: 'Lato', sans-serif;
     font-size: 22px;
     letter-spacing: 0.5px;
-    color: #FDFFFC;
+    color: #fdfffc;
 }
 
 button:last-of-type { margin-right: 0; }
@@ -34,14 +33,14 @@ button:focus { outline: none; }
 button:active { background-color: #ff9f1c; /* Orange */ }
 button:hover {
     cursor: pointer;
-    background-color: #ff9f1c
+    background-color: #ff9f1c;
 }
 
 #board {
     margin: 20px auto;
     width: 500px;
     overflow: hidden;
-    box-shadow: 3px 3px 5px #999;
+    box-shadow: 3px 3px 5px #ccc;
 }
 
 .button--selected { background-color: #ff9f1c; /* Orange */ }
@@ -58,8 +57,8 @@ button:hover {
     width: 100px;
     height: 100px;
     float: left;
-    background-color: #eee;
-    border: 1px solid #2EC4B6;
+    background-color: rgba(240, 240, 240, 0.5);
+    border: 1px solid #2ec4b6;
 }
 
 .current-position,
@@ -80,15 +79,12 @@ button:hover {
     width: 95%;
     height: 60px;
     box-shadow: 2px 2px 5px #ccc;
-    border-radius: 2px;
-    background-color: #2EC4B6;
+    background-color: #2ec4b6;
     font-size: 24px;
-    color: #FDFFFC;
+    color: #fdfffc;
 }
 
-.marquee__message {
-    line-height: 40px;
-}
+.marquee__message { line-height: 40px; }
 
 .timer {
     display: flex;
@@ -97,16 +93,48 @@ button:hover {
     margin: 20px auto;
     padding: 10px 60px;
     width: 250px;
-    box-shadow: 3px 3px 10px #999;
+    box-shadow: 2px 2px 5px #ccc;
     border-radius: 2px;
-    background-color: #E71D36;
-    color: #FDFFFC;
+    background-color: #e71d36;
+    color: #fdfffc;
 }
 
 .timer__seconds {
     font-size: 56px;
     font-weight: 700;
 }
+
+#instructions .instructions__text,
+#aboutChip .about-chip__text,
+#aboutTheHouse .about-the-house__text {
+    display: none;
+    position: absolute;
+    top: 0;
+    left: 325px;
+    padding: 20px;
+    width: 325px;
+    border: 2px solid #eee;
+    box-shadow: 1px 1px 3px #eee;
+    background-color: #fdfffc;
+    color: #313131;
+
+}
+
+#instructions:hover .instructions__text,
+#aboutChip:hover .about-chip__text,
+#aboutTheHouse:hover .about-the-house__text {
+    display: block;
+    animation: fadeIn 1s;
+}
+
+@keyframes fadeIn {
+    from {opacity: 0;}
+    to {opacity: 1;}
+}
+
+#instructions .instructions__text p,
+#aboutChip .about-chip__text p,
+#aboutTheHouse .about-the-house__text p { margin-bottom: 10px; }
 
 .card {
     position: absolute;
@@ -141,7 +169,7 @@ button:hover {
 .card__text {
     font-size: 24px;
     font-style: italic;
-    color: #FDFFFC;
+    color: #fdfffc;
     line-height: 1.5em;
 }
 

@@ -6,10 +6,10 @@
     top: 0;
     width: 300px;
     height: 100%;
-    background-color: #2EC4B6;
+    background-color: #2ec4b6;
     box-shadow: 2px 2px 5px #ccc;
-    color: #FDFFFC;
-    z-index: 10;
+    color: #fdfffc;
+    z-index: 5;
 }
 
 .navbar__title {
@@ -26,11 +26,12 @@
 }
 
 .navbar__list-item {
+    position: relative;
     padding: 20px 20px;
 }
 
 .navbar__list-item:hover {
-    background-color: #FF9F1C;
+    background-color: #ff9f1c;
     cursor: pointer;
 }
 
@@ -44,9 +45,9 @@
         position: fixed;
         top: auto;
         bottom: 0;
-        border-top: 2px solid #2EC4B6;
-        background-color: #FDFFFC;
-        color: #FF9F1C;
+        border-top: 2px solid #2ec4b6;
+        background-color: #fdfffc;
+        color: #ff9f1c;
     }
 
     .navbar__title {
