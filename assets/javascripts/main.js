@@ -11,7 +11,6 @@ var easyButton = document.querySelector("#easyButton");
 var hardButton = document.querySelector("#hardButton");
 var timerElement = document.querySelector("#timer");
     timerElement.innerHTML = timer.currentCount;
-var cardContainer = document.querySelector(".card__container");
 
 // The data object contains properties used to check whether a key pressed
 // matches the proper arrow keys (i.e., ArrowUp, ArrowDown, etc.). Each one
@@ -57,11 +56,6 @@ hardButton.addEventListener("click", function(){
     board.setGridSize(10);
     game.new();
     buttonSelected(this, easyButton);
-});
-
-// Removes the display card that appears on page load.
-cardContainer.addEventListener("click", function() {
-    this.remove();
 });
 
 /**
@@ -157,8 +151,3 @@ function shuffle(collection) {
 
 // Remap arrow keys every 3/4 second
 function remapControls() { setInterval(mapControls(), 750); }
-
-// Remove the card that shows up on page load
-function removeCard() {
-    cardContainer.remove();
-}
