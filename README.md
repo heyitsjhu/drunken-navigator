@@ -2,7 +2,7 @@
 
 This is a simple browser game built with HTML, CSS, and vanilla JavaScript.
 
-To play, go [here](https://cdn.rawgit.com/heyitsjhu/drunken-navigator/d5ad2ddf/index.html).
+To play, go [here](https://cdn.rawgit.com/heyitsjhu/drunken-navigator/e65eef05/index.html).
 
 *Note:* The above link is hosted on RawGit. As long as their service is free, the link should work.
 
