@@ -44,7 +44,7 @@ var $board = function() {
         var noOfSquares = Math.pow(gridSize, 2);
 
         // Regenerate positions if the start and end positions are the same.
-        while(start === end) {
+        while(start === end || Math.abs(start - end) < 30) {
             var start = Math.floor(Math.random() * (noOfSquares - 1) + 1);
             var end = Math.floor(Math.random() * (noOfSquares - 1) + 1);
         }
