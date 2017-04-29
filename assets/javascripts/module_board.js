@@ -1,16 +1,22 @@
+// MODULE_BOARD.JS
+
+/**
+    The board module contains the logic necessary for creating the board itself, setting appropriate HTML attributes to individual squares on the board, and changing the board size based on difficulty. Its method is primarily used when starting a new game or selecting a new difficulty.
+ */
+
 var $board = function() {
-    var anchor, count, currentBoard;
+    var count, currentBoard;
     var gridSize = 7;
 
-    // Setups the game baord by targeting the div#board
-    // and running the generateSquares() method.
+    // Setup the game board by generating the board's individual squares
+    // inside the the div#board element.
     function setupBoard() {
         currentBoard = document.querySelector("#board");
         count = 1;
         var squareSize = 500 / gridSize;
 
-        for (var x = 1; x <= gridSize; x++) {
-            for (var y = 1; y <= gridSize; y++) {
+        for (let x = 1; x <= gridSize; x++) {
+            for (let y = 1; y <= gridSize; y++) {
                 var newSquare = document.createElement("div");
                 newSquare.className = "square row" + x + " col" + y;
                 newSquare.id = count;
@@ -34,26 +40,29 @@ var $board = function() {
     // Generates a pair of random positions. One for the starting position
     // (the drunk). The other for the ending position (the home).
     function generateStartingPositions() {
+        // Get total number of squares by squaring the gridSize.
         var noOfSquares = Math.pow(gridSize, 2);
 
+        // Regenerate positions if the start and end positions are the same.
         while(start === end) {
             var start = Math.floor(Math.random() * (noOfSquares - 1) + 1);
             var end = Math.floor(Math.random() * (noOfSquares - 1) + 1);
         }
 
+        // Add the appropriate class to start and end squares.
         document.getElementById(start).classList.add("current-position");
         document.getElementById(end).classList.add("target-goal");
     }
 
     return {
-        // Creates new div#board HTML element and
-        // inserts the element into the HTML document.
+        // Creates new div#board HTML element and inserts it before the
+        // 'anchor' element in the HTML document.
         create: function() {
             // Inserts new div#board into HTML body.
             var mainElement = document.querySelector("main");
             var newBoard = document.createElement("div");
             newBoard.id = "board";
-            anchor = document.querySelector(".board__controls");
+            var anchor = document.querySelector(".board__controls");
             mainElement.insertBefore(newBoard, anchor);
 
             setupBoard();
@@ -63,7 +72,8 @@ var $board = function() {
         // Removes the current board.
         remove: function() {
             currentBoard = document.querySelector("#board");
-            if(currentBoard) currentBoard.remove();
+            if(currentBoard)
+                currentBoard.remove();
         },
 
         // Sets the grid size count.

@@ -1,4 +1,9 @@
-// Game module keeps track of the game's status.
+// MODULE_GAME.JS
+
+/**
+    The game module keeps track of the game's progress. Use its methods to
+    change the game's state or get the game's status.
+ */
 var $game = function() {
     var gameOver = false;
 
@@ -8,14 +13,15 @@ var $game = function() {
         },
 
         // Sets gameOver to true if the game ends.
-        hasEnded: function() {gameOver = true;},
+        hasEnded: function() { gameOver = true; },
 
         // Sets gameOver variable back to false.
-        reset: function() {gameOver = false;},
+        reset: function() { gameOver = false; },
 
+        // Creates a new game.
         new: function() {
-            // Reset the text inside the button
-            if (resetButton.textContent !== "Restart") resetButton.textContent = "Restart";
+            if (resetButton.textContent !== "Restart")
+                resetButton.textContent = "Restart";
             board.remove();
             game.reset();
             timer.stopAndReset();

@@ -1,3 +1,5 @@
+// MAIN.JS
+
 var game = $game();
 var board = $board();
 var marquee = $marquee();
@@ -11,6 +13,12 @@ var timerElement = document.querySelector("#timer");
     timerElement.innerHTML = timer.currentCount;
 var cardContainer = document.querySelector(".card__container");
 
+// The data object contains properties used to check whether a key pressed
+// matches the proper arrow keys (i.e., ArrowUp, ArrowDown, etc.). Each one
+// of these properties contain an object, whose properties are assigned every
+// time a new game starts. These properties dictate the actual direction the
+// character will move when the corresponding key is pressed. The assignment is
+// performed by the mapControls() function.
 var data = {
         "ArrowUp": {},
         "ArrowRight": {},
@@ -22,10 +30,13 @@ var data = {
 game.new();
 
 /**
- ** EVENT LISTENERS
- **/
+    EVENT LISTENERS
+ */
 
-// Add event listener to document
+// Listens for when key is pressed. That event is then checked to see
+// if the key was an arrow key (left, right, up, or down). The first
+// if-statement prevents prevents the logic from running if the game is
+// over.
 document.body.addEventListener("keydown", function(e){
     if (game.isNotOver()) {
         moveCharacter(e);
@@ -48,13 +59,14 @@ hardButton.addEventListener("click", function(){
     buttonSelected(this, easyButton);
 });
 
-// Removes the card that appears on page load
+// Removes the display card that appears on page load.
 cardContainer.addEventListener("click", function() {
     this.remove();
 });
+
 /**
- ** FUNCTIONS
- **/
+    FUNCTIONS
+ */
 
 // Highlights active difficulty button.
 function buttonSelected(buttonOn, buttonOff) {
@@ -66,14 +78,16 @@ function buttonSelected(buttonOn, buttonOff) {
 }
 
 function moveCharacter(e) {
-    // Find current position
+    // Find current position.
     var currentPosition = document.querySelector(".current-position");
 
-    // If key pressed is valid, move to next position
-    for (var validKey in data) {
+    for (let validKey in data) {
+        // Checks if the key pressed is valid && the current position isn't at
+        // the edge of the board.
         if (e.key === validKey && currentPosition.getAttribute(data[validKey].edge) === "false") {
             moveToNextPosition(currentPosition, validKey).classList.add("current-position");
 
+            // Starts the timer if it isn't already running.
             if (!timer.isRunning()) timer.start();
 
             // Remove class from old position.
@@ -82,13 +96,13 @@ function moveCharacter(e) {
     }
 }
 
-// Move to next position on board based on current position
+// Move to next position on board based on current position.
 function moveToNextPosition(current, keypressed) {
     return document.getElementById(Number(current.id) + data[keypressed].move);
 }
 
+// Check if current position is the same as the end (goal) position.
 function checkWinCondition() {
-    // Check if new position is at the goal
     var currentPosition = document.querySelector(".current-position");
     if (currentPosition.classList.contains("target-goal")) {
         game.hasEnded();
@@ -97,12 +111,14 @@ function checkWinCondition() {
     }
 }
 
-// Initiate countdown timer
+// Initiate countdown timer (updates every second).
 setInterval(function() {
+
+    // Timer runs if the game isn't over and the clock should be running.
     if (game.isNotOver() && timer.isRunning()) {
         timerElement.innerHTML = timer.currentCount();
 
-        // Game ends if timer reaches zero
+        // Game ends if the timer reaches zero.
         if (timerElement.innerHTML == 0) {
             game.hasEnded();
             marquee.setMessage("Ugh, Chip fell asleep! He won't budge. Oh well, he's on his own, now. Poor doggies.");
@@ -111,7 +127,11 @@ setInterval(function() {
     }
 }, 1000);
 
-// Map arrow keys to a random direction
+// Randomly maps the properties of controlData to the properties of the data
+// variable. These properties dictate how the character moves when the user
+// presses an arrow key. For example, the ArrowDown key might be mapped in such
+// a way that, when pressed, the character moves left. This simulates the
+// character's drunken state!
 function mapControls() {
 
     var controlData = [
@@ -123,21 +143,20 @@ function mapControls() {
 
     shuffle(controlData);
 
-    for (var key in data) {
+    for (let key in data) {
         data[key] = controlData.pop();
     }
 }
 
-function shuffle(a) {
-    for (let i = a.length; i; i--) {
+function shuffle(collection) {
+    for (let i = collection.length; i; i--) {
         let j = Math.floor(Math.random() * i);
-        [a[i - 1], a[j]] = [a[j], a[i - 1]];
+        [collection[i - 1], collection[j]] = [collection[j], collection[i - 1]];
     }
 }
 
 // Remap arrow keys every 3/4 second
 function remapControls() { setInterval(mapControls(), 750); }
-
 
 // Remove the card that shows up on page load
 function removeCard() {
