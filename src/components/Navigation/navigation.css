@@ -6,8 +6,8 @@
     top: 0;
     width: 300px;
     height: 100%;
-    background-color: #2ec4b6;
-    color: #fdfffc;
+    background-color: #2EC4B6;
+    color: #FDFFFC;
     z-index: 1;
 }
 
@@ -30,8 +30,35 @@
 }
 
 .navbar__list-item:hover {
-    background-color: #ff9f1c;
+    background-color: #FF9F1C;
     cursor: pointer;
+}
+
+#instructions .instructions__text,
+#aboutChip .about-chip__text,
+#aboutTheHouse .about-the-house__text {
+    display: none;
+    position: absolute;
+    top: 0;
+    left: 310px;
+    padding: 20px;
+    width: 325px;
+    border: 2px solid #EEE;
+    box-shadow: 1px 1px 3px #EEE;
+    background-color: #FDFFFC;
+    color: #313131;
+}
+
+#instructions:hover  .instructions__text,
+#aboutChip:hover     .about-chip__text,
+#aboutTheHouse:hover .about-the-house__text {
+    display: block;
+    animation: fadeIn 1s;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
 }
 
 @media screen and (max-width: 800px) {
@@ -43,9 +70,9 @@
         width: 100%;
         top: auto;
         bottom: 40px;
-        border-top: 2px solid #2ec4b6;
+        border-top: 2px solid #2EC4B6;
         background-color: rgba(250, 250, 250, 0.9);
-        color: #ff9f1c;
+        color: #FF9F1C;
     }
 
     .navbar__title {

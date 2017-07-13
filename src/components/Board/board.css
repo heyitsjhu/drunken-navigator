@@ -1,0 +1,6 @@
+#board {
+  margin: 20px auto;
+  width: 500px;
+  overflow: hidden;
+  box-shadow: 3px 3px 5px #CCC;
+}
